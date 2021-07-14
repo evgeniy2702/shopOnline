@@ -1,0 +1,45 @@
+<div class="agileits_header" th:fragment="header" xmlns:th="http://www.thymeleaf.org">
+        <div class="w3l_offers">
+            <a th:href="@{~/guest/page_discount_prop}">Акция !</a>
+        </div>
+        <div class="w3l_search">
+            <form th:action="@{~/guest/search}" th:method="post">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                <input type="text" name="productSearch" value="Найти продукт..." onfocus="this.value = '';"
+                       onblur="if (this.value == '') {this.value = 'Search a product...';}" required="">
+                <input type="submit" th:name="'search'" value=" ">
+            </form>
+        </div>
+        <div class="product_list_header">
+            <form th:action="@{~/guest/cart}" th:method="post" class="last">
+                <fieldset>
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                    <input type="hidden" name="cmd" value="_cart" />
+                    <input type="hidden" name="display" value="1" />
+                    <input type="submit" name="submit" value="Корзина" class="button" />
+                </fieldset>
+            </form>
+        </div>
+        <div class="w3l_header_right" >
+            <ul>
+                <li class="dropdown profile_details_drop">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        <span class="caret"></span>
+                    </a>
+                    <div class="mega-dropdown-menu">
+                        <div class="w3ls_vegetables">
+                            <ul class="dropdown-menu drp-mnu">
+                                <li><a th:href="@{~/sign_page?style=true}" >Login</a></li>
+                                <li><a th:href="@{~/sign_page?style=false}">Sign Up</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="w3l_header_right1">
+            <h2><a th:href="@{~/guest/mail_page}">Свяжитесь с нами</a></h2>
+        </div>
+        <div class="clearfix"> </div>
+</div>

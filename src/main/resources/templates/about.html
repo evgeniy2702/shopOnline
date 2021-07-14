@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+<head>
+	<title>магазин БОЯРИНЯ | О нас</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- //for-mobile-apps -->
+	<link href="../static/css/bootstrap.css"  th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome icons -->
+	<link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- //font-awesome icons -->
+	<!-- js -->
+	<script src="../static/js/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+	<!-- //js -->
+	<link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+			href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+	<link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+			href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+	<script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+	</script>
+	<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<!-- header -->
+<header th:if="${guest}" th:insert="blocks/header :: header"></header>
+<header th:if="${user}" th:insert="blocks_user/user_header :: user_header"></header>
+<!-- script-for sticky-nav -->
+	<script>
+	$(document).ready(function() {
+		 var navoffeset=$(".agileits_header").offset().top;
+		 $(window).scroll(function(){
+			var scrollpos=$(window).scrollTop(); 
+			if(scrollpos >=navoffeset){
+				$(".agileits_header").addClass("fixed");
+			}else{
+				$(".agileits_header").removeClass("fixed");
+			}
+		 });
+		 
+	});
+	</script>
+<!-- //script-for sticky-nav -->
+<header th:if="${guest}" th:insert="blocks/logo_products :: logo_products"></header>
+<header th:if="${user}" th:insert="blocks_user/user_logo_products :: user_logo_products"></header>
+<!-- //header -->
+<!-- products-breadcrumb -->
+	<div class="products-breadcrumb">
+		<div class="container">
+			<ul>
+				<li th:if="${guest}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/index_page}" href="index.html">На главную</a><span>|</span></li>
+				<li th:if="${user}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/user/index_page}" href="index.html">На главную</a><span>|</span></li>
+				<li>О нас</li>
+			</ul>
+		</div>
+	</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner" >
+	<div th:if="${guest}" th:insert="blocks/banner :: banner"></div>
+	<div th:if="${user}" th:insert="blocks_user/user_banner :: user_banner"></div>
+	<div class="w3l_banner_nav_right">
+		<!-- about -->
+		<div class="privacy about">
+			<h3>О нас</h3>
+			<p class="animi">ТМ БОЯРИНЯ была организована в 2012 г. и основным видом деятельности была розничная торговля домашним
+				мясом, а так же изготовление замороженных полуфабрикатов их мяса. Лозунгом компании был слоган "Смачно, як у дитинстві".
+				Основные принципы работы компании :</p>
+			<div class="agile_about_grids">
+				<div class="col-md-6 agile_about_grid_right">
+					<img th:src="@{/images/31.jpg}" src="../static/images/31.jpg" alt=" " class="img-responsive" />
+				</div>
+				<div class="col-md-6 agile_about_grid_left">
+					<ol>
+						<li>свежесть превыше всего</li>
+						<li>все лучшее для покупателя</li>
+						<li>открытость и честность</li>
+						<li>своми руками к вашему столу</li>
+					</ol>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!-- //about -->
+	</div>
+	<div class="clearfix"></div>
+</div>
+<!-- //banner -->
+<!-- team -->
+	<div class="team" th:style="'display: flex '" style="display: flex ">
+		<div class="container">
+			<h3>Наша команда</h3>
+			<div class="agileits_team_grids" style="display: flex; align-items: center; justify-items: center;" >
+				<div class="col-md-3 agileits_team_grid">
+					<img th:src="@{/images/32.jpg}" src="../static/images/32.jpg" alt=" " class="img-responsive" />
+					<h4>Мельник Юрий</h4>
+					<p>директор</p>
+					<ul th:if="${guest}" class="agileits_social_icons agileits_social_icons_team">
+						<li><a th:href="@{#}" href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{#}" href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{#}" href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+					</ul>
+					<ul th:if="${user}" class="agileits_social_icons agileits_social_icons_team">
+						<li><a th:href="@{~/user/#}" href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{~/user/#}" href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{~/user/#}" href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 agileits_team_grid">
+					<img th:src="@{/images/33.jpg}" src="../static/images/33.jpg" alt=" " class="img-responsive" />
+					<h4>Беляк Марина</h4>
+					<p>Бухгалтерия</p>
+					<ul th:if="${guest}" class="agileits_social_icons agileits_social_icons_team">
+						<li><a th:href="@{#}" href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{#}" href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{#}" href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+					</ul>
+					<ul th:if="${user}" class="agileits_social_icons agileits_social_icons_team">
+						<li><a th:href="@{~/user/#}" href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{~/user/#}" href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{~/user/#}" href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="col-md-3 agileits_team_grid">
+					<img th:src="@{/images/34.jpg}" src="../static/images/34.jpg" alt=" " class="img-responsive" />
+					<h4>Журенко Евгений</h4>
+					<p>Финансы</p>
+					<ul th:if="${guest}" class="agileits_social_icons agileits_social_icons_team">
+						<li><a th:href="@{#}" href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{#}" href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{#}" href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+					</ul>
+					<ul th:if="${user}" class="agileits_social_icons agileits_social_icons_team">
+						<li><a th:href="@{~/user/#}" href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{~/user/#}" href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+						<li><a th:href="@{~/user/#}" href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+<!-- //team -->
+<!-- testimonials -->
+	<div class="testimonials">
+		<div class="container">
+			<h3>Отзывы</h3>
+				<div class="w3_testimonials_grids">
+					<div class="wmuSlider example1 animated wow slideInUp" data-wow-delay=".5s">
+						<div class="wmuSliderWrapper">
+							<article style="position: absolute; width: 100%; opacity: 0;"> 
+								<div class="banner-wrap">
+									<div class="col-md-6 w3_testimonials_grid">
+										<p><i class="fa fa-quote-right" aria-hidden="true"></i>Был выбран для этих вопросов, поэтому он обязан прислушиваться к мудрому человеку, что он должен либо отвергать некоторые
+											или же он переносит боли в высшей степени надежных других великих удовольствий,
+											боли. </p>
+										<h4>Андрей <span>Покупатель</span></h4>
+									</div>
+									<div class="col-md-6 w3_testimonials_grid">
+										<p><i class="fa fa-quote-right" aria-hidden="true"></i>Был выбран для этих вопросов, поэтому он обязан прислушиваться к мудрому человеку, что он должен либо отвергать некоторые
+											или же он переносит боли в высшей степени надежных других великих удовольствий,
+											боли. </p>
+										<h4>Толик <span>Покупатель</span></h4>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</article>
+							<article style="position: absolute; width: 100%; opacity: 0;"> 
+								<div class="banner-wrap">
+									<div class="col-md-6 w3_testimonials_grid">
+										<p><i class="fa fa-quote-right" aria-hidden="true"></i>Был выбран для этих вопросов, поэтому он обязан прислушиваться к мудрому человеку, что он должен либо отвергать некоторые
+											или же он переносит боли в высшей степени надежных других великих удовольствий,
+											боли. </p>
+										<h4>Катя <span>ПОкупатель</span></h4>
+									</div>
+									<div class="col-md-6 w3_testimonials_grid">
+										<p><i class="fa fa-quote-right" aria-hidden="true"></i>Был выбран для этих вопросов, поэтому он обязан прислушиваться к мудрому человеку, что он должен либо отвергать некоторые
+											или же он переносит боли в высшей степени надежных других великих удовольствий,
+											боли. </p>
+										<h4>Павел <span>Покупатель</span></h4>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</article>
+							<article style="position: absolute; width: 100%; opacity: 0;"> 
+								<div class="banner-wrap">
+									<div class="col-md-6 w3_testimonials_grid">
+										<p><i class="fa fa-quote-right" aria-hidden="true"></i>Был выбран для этих вопросов, поэтому он обязан прислушиваться к мудрому человеку, что он должен либо отвергать некоторые
+											или же он переносит боли в высшей степени надежных других великих удовольствий,
+											боли. </p>
+										<h4>Гриша <span>Покупатель</span></h4>
+									</div>
+									<div class="col-md-6 w3_testimonials_grid">
+										<p><i class="fa fa-quote-right" aria-hidden="true"></i>Был выбран для этих вопросов, поэтому он обязан прислушиваться к мудрому человеку, что он должен либо отвергать некоторые
+											или же он переносит боли в высшей степени надежных других великих удовольствий,
+											боли. </p>
+										<h4>Дима <span>Покупатель</span></h4>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</article>
+						</div>
+					</div>
+					<script th:src="@{/js/jquery.wmuSlider.js}" src="../static/js/jquery.wmuSlider.js"></script>
+					<script>
+						$('.example1').wmuSlider();         
+					</script> 
+				</div>
+		</div>
+	</div>
+<!-- //testimonials -->
+<!-- newsletter -->
+<div th:if="${guest}" th:insert="blocks/newsletter :: newsletter"></div>
+<div th:if="${user}" th:insert="blocks_user/user_newsletter :: user_newsletter"></div>
+<!-- //newsletter -->
+<!-- footer -->
+<div th:if="${guest}" th:insert="blocks/footer :: footer"></div>
+<div th:if="${user}" th:insert="blocks_user/user_footer :: user_footer"></div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+<script th:src="@{/js/minicart.js}" src="../static/js/minicart.js" ></script>
+<script>
+		paypal.minicart.render();
+
+		paypal.minicart.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+
+			// Count the number of each item in the cart
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+
+	</script>
+</body>
+</html>

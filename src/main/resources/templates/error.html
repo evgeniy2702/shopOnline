@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>магазин БОЯРИНЯ | Error</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- //for-mobile-apps -->
+    <link href="../static/css/bootstrap.css"  th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css}" >
+    <!-- font-awesome icons -->
+    <link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="../static/js/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <!-- //js -->
+    <link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+          href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+          href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+    <script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+</head>
+<body>
+<!-- message -->
+<main th:if="${guest}" class="container " style="display: block; text-align: center;" th:style="'display: block; text-align: center'">
+    <h1 th:text="${account}"></h1>
+    <a class="button" th:href="@{~/guest/about}" >Вернуться на главную страницу</a>
+</main>
+<main th:if="${user}" class="container " style="display: block; text-align: center;" th:style="'display: block; text-align: center'">
+    <h1 th:text="${account}"></h1>
+    <a class="button" th:href="@{~/user/about/{idUSer}(idUSer = ${user_person.getId()})}" >Вернуться на главную страницу</a>
+</main>
+<main th:if="${admin}" class="container " style="display: block; text-align: center;" th:style="'display: block; text-align: center'">
+    <h1 th:text="${account}"></h1>
+    <a class="button" th:href="@{~/user/about/1}" >Вернуться на главную страницу</a>
+</main>
+<!-- //message -->
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>магазин БОЯРИНЯ | Проверка корзины покупок</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- //for-mobile-apps -->
+	<link th:href="@{/css/bootstrap.css}" href="/static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link th:href="@{/css/style.css}" href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome icons -->
+	<link th:href="@{/css/font-awesome.css}" href="/static/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- //font-awesome icons -->
+
+	<link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+		  href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+	<link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+		  href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<!-- header -->
+<header th:if="${guest}" th:insert="blocks/header :: header"></header>
+<header th:if="${user}" th:insert="blocks_user/user_header :: user_header"></header>
+
+<header th:if="${guest}" th:insert="blocks/logo_products :: logo_products"></header>
+<header th:if="${user}" th:insert="blocks_user/user_logo_products :: user_logo_products"></header>
+<!-- //header -->
+<!-- products-breadcrumb -->
+	<div class="products-breadcrumb">
+		<div class="container">
+			<ul>
+				<li th:if="${guest}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/index_page}">Home</a><span>|</span></li>
+				<li th:if="${user}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/user/index_page}">Home</a><span>|</span></li>
+				<li>Просмотр корзины</li>
+			</ul>
+		</div>
+	</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+	<div class="banner">
+		<div th:if="${guest}" th:insert="blocks/banner :: banner"></div>
+		<div th:if="${user}" th:insert="blocks_user/user_banner :: user_banner"></div>
+		<div class="w3l_banner_nav_right">
+<!-- about -->
+		<div class="privacy about">
+			<h3>Просмотр<span> корзины</span></h3>
+
+	      <div class="checkout-right">
+					<h4>Ваш заказ составил: <span>3 наименования продуктов</span></h4>
+				<table class="timetable_sub">
+					<thead>
+						<tr>
+							<th>н/п No.</th>
+							<th>Продукт</th>
+							<th>Колличество</th>
+							<th>Наименование продукта</th>
+
+							<th>Цена</th>
+							<th>Удалить</th>
+						</tr>
+					</thead>
+					<tbody><tr class="rem1">
+						<td class="invert">1</td>
+						<td th:if="${guest}" class="invert-image"><a th:href="@{~/single_page}"><img src="../static/images/1.png" alt=" " class="img-responsive"></a></td>
+						<td th:if="${user}" class="invert-image"><a th:href="@{~/user/single_page}"><img src="../static/images/1.png" alt=" " class="img-responsive"></a></td>
+						<td class="invert">
+							 <div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value"><span>1</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
+							</div>
+						</td>
+						<td class="invert">Fortune Sunflower Oil</td>
+
+						<td class="invert">$290.00</td>
+						<td class="invert">
+							<div class="rem">
+								<div class="close1"> </div>
+							</div>
+
+						</td>
+					</tr>
+					<tr class="rem2">
+						<td class="invert">2</td>
+						<td th:if="${guest}" class="invert-image"><a th:href="@{~/single_page}"><img src="../static/images/3.png" alt=" " class="img-responsive"></a></td>
+						<td th:if="${user}" class="invert-image"><a th:href="@{~/user/single_page}"><img src="../static/images/3.png" alt=" " class="img-responsive"></a></td>
+						<td class="invert">
+							 <div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value"><span>1</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
+							</div>
+						</td>
+						<td class="invert">Basmati Rise (5 Kg)</td>
+
+						<td class="invert">$250.00</td>
+						<td class="invert">
+							<div class="rem">
+								<div class="close2"> </div>
+							</div>
+
+						</td>
+					</tr>
+					<tr class="rem3">
+						<td class="invert">3</td>
+						<td th:if="${guest}" class="invert-image"><a th:href="@{~/single_page}"><img src="../static/images/2.png" alt=" " class="img-responsive"></a></td>
+						<td th:if="${user}" class="invert-image"><a th:href="@{~/user/single_page}"><img src="../static/images/2.png" alt=" " class="img-responsive"></a></td>
+						<td class="invert">
+							 <div class="quantity">
+								<div class="quantity-select">
+									<div class="entry value-minus">&nbsp;</div>
+									<div class="entry value"><span>1</span></div>
+									<div class="entry value-plus active">&nbsp;</div>
+								</div>
+							</div>
+						</td>
+						<td class="invert">Pepsi Soft Drink (2 Ltr)</td>
+
+						<td class="invert">$15.00</td>
+						<td class="invert">
+							<div class="rem">
+								<div class="close3"> </div>
+							</div>
+
+						</td>
+					</tr>
+
+				</tbody></table>
+			</div>
+			<div class="checkout-left">
+				<div class="col-md-4 checkout-left-basket">
+					<h4>Положить в корзину</h4>
+					<ul>
+						<li>Продукт1 <i>-</i> <span>$15.00 </span></li>
+						<li>Продукт2 <i>-</i> <span>$25.00 </span></li>
+						<li>Продукт3 <i>-</i> <span>$29.00 </span></li>
+						<li>Доставка <i>-</i> <span>$15.00</span></li>
+						<li>ИТОГО : <i>-</i> <span>$84.00</span></li>
+					</ul>
+				</div>
+				<div class="col-md-8 address_form_agile">
+					  <h4>Добавить детали заказа :</h4>
+				<form action="payment.html" method="post" class="creditly-card-form agileinfo_form">
+									<section class="creditly-wrapper wthree, w3_agileits_wrapper">
+										<div class="information-wrapper">
+											<div class="first-row form-group">
+												<div class="controls">
+													<label class="control-label">Фамилия Имя : </label>
+													<input class="billing-address-name form-control" type="text" name="name" placeholder="Full name">
+												</div>
+												<div class="w3_agileits_card_number_grids">
+													<div class="w3_agileits_card_number_grid_left">
+														<div class="controls">
+															<label class="control-label">Номер телефона :</label>
+														    <input class="form-control" type="text" placeholder="Mobile number">
+														</div>
+													</div>
+													<div class="w3_agileits_card_number_grid_right">
+														<div class="controls">
+															<label class="control-label">Email : </label>
+														 <input class="form-control" type="text" placeholder="Email">
+														</div>
+													</div>
+													<div class="clear"> </div>
+												</div>
+												<div class="controls">
+													<label class="control-label">Город доставки: </label>
+												 <input class="form-control" type="text" placeholder="Город доставки">
+												</div>
+													<div class="controls">
+															<label class="control-label">Адрес доставки : </label>
+												     <select class="form-control option-w3ls">
+																							<option>Отделение почты</option>
+																							<option>Курьером</option>
+																							<option>На склад</option>
+
+																					</select>
+													</div>
+											</div>
+											<button class="submit check_out">Доставка по этому адресу</button>
+										</div>
+									</section>
+								</form>
+									<div class="checkout-right-basket">
+				        	<a href="payment.html">Совершить платеж <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+			      	</div>
+					</div>
+
+				<div class="clearfix"> </div>
+
+			</div>
+
+		</div>
+<!-- //about -->
+		</div>
+		<div class="clearfix"></div>
+	</div>
+<!-- //banner -->
+
+
+<!-- newsletter -->
+<div th:if="${guest}" th:insert="blocks/newsletter :: newsletter"></div>
+<div th:if="${user}" th:insert="blocks_user/user_newsletter :: user_newsletter"></div>
+<!-- //newsletter -->
+<!-- footer -->
+<div th:if="${guest}" th:insert="blocks/footer :: footer"></div>
+<div th:if="${user}" th:insert="blocks_user/user_footer :: user_footer"></div>
+<!-- //footer -->
+<!-- js -->
+<script th:src="@{/js/jquery-1.11.1.min.js}" src="../static/js/jquery-1.11.1.min.js"></script>
+							 <!--quantity-->
+									<script>
+									$('.value-plus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
+										divUpd.text(newVal);
+									});
+
+									$('.value-minus').on('click', function(){
+										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
+										if(newVal>=1) divUpd.text(newVal);
+									});
+									</script>
+								<!--quantity-->
+							<script>$(document).ready(function(c) {
+								$('.close1').on('click', function(c){
+									$('.rem1').fadeOut('slow', function(c){
+										$('.rem1').remove();
+									});
+									});	  
+								});
+						   </script>
+							<script>$(document).ready(function(c) {
+								$('.close2').on('click', function(c){
+									$('.rem2').fadeOut('slow', function(c){
+										$('.rem2').remove();
+									});
+									});	  
+								});
+						   </script>
+						  	<script>$(document).ready(function(c) {
+								$('.close3').on('click', function(c){
+									$('.rem3').fadeOut('slow', function(c){
+										$('.rem3').remove();
+									});
+									});	  
+								});
+						   </script>
+
+<!-- //js -->
+<!-- script-for sticky-nav -->
+	<script>
+	$(document).ready(function() {
+		 var navoffeset=$(".agileits_header").offset().top;
+		 $(window).scroll(function(){
+			var scrollpos=$(window).scrollTop(); 
+			if(scrollpos >=navoffeset){
+				$(".agileits_header").addClass("fixed");
+			}else{
+				$(".agileits_header").removeClass("fixed");
+			}
+		 });
+		 
+	});
+	</script>
+<!-- //script-for sticky-nav -->
+<!-- start-smoth-scrolling -->
+<script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+<script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+</script>
+<!-- start-smoth-scrolling -->
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+<script th:src="@{/js/minicart.js}" src="../static/js/minicart.js"></script>
+<script>
+		paypal.minicart.render();
+
+		paypal.minicart.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+
+			// Count the number of each item in the cart
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+
+	</script>
+</body>
+</html>

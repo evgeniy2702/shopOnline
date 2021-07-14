@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>магазин БОЯРИНЯ | Часто задаваемые вопросы</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- //for-mobile-apps -->
+	<link href="../static/css/bootstrap.css"  th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome icons -->
+	<link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- //font-awesome icons -->
+	<!-- js -->
+	<script src="../static/js/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+	<!-- //js -->
+	<link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+		  href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+	<link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+		  href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+	<script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+	</script>
+	<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<!-- header -->
+<header th:if="${guest}" th:insert="blocks/header :: header"></header>
+<header th:if="${user}" th:insert="blocks_user/user_header :: user_header"></header>
+<!-- script-for sticky-nav -->
+	<script>
+	$(document).ready(function() {
+		 var navoffeset=$(".agileits_header").offset().top;
+		 $(window).scroll(function(){
+			var scrollpos=$(window).scrollTop(); 
+			if(scrollpos >=navoffeset){
+				$(".agileits_header").addClass("fixed");
+			}else{
+				$(".agileits_header").removeClass("fixed");
+			}
+		 });
+		 
+	});
+	</script>
+<!-- //script-for sticky-nav -->
+<header th:if="${guest}" th:insert="blocks/logo_products :: logo_products"></header>
+<header th:if="${user}" th:insert="blocks_user/user_logo_products :: user_logo_products"></header>
+<!-- //header -->
+<!-- products-breadcrumb -->
+	<div class="products-breadcrumb">
+		<div class="container">
+			<ul>
+				<li th:if="${guest}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/index_page}" href="index.html">На главную</a><span>|</span></li>
+				<li th:if="${user}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/user/index_page}" href="index.html">На главную</a><span>|</span></li>
+				<li>Часто задаваемые вопросы</li>
+			</ul>
+		</div>
+	</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+	<div class="banner">
+		<div th:if="${guest}" th:insert="blocks/banner :: banner"></div>
+		<div th:if="${user}" th:insert="blocks_user/user_banner :: user_banner"></div>
+		<div class="w3l_banner_nav_right">
+<!-- faq -->
+		<div class="faq">
+			<h3>Часто задаваемые вопросы</h3>
+			<div class="panel-group w3l_panel_group_faq" id="accordion" role="tablist" aria-multiselectable="true">
+			  <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingOne">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 1
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+				  <div class="panel-body panel_text">
+					Содержание вопроса 1
+				  </div>
+				</div>
+			  </div>
+			  <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingTwo">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 2
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 2
+				   </div>
+				</div>
+			  </div>
+			  <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingThree">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 3
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 3
+				   </div>
+				</div>
+			  </div>
+			  <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingFour">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 4
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 4
+				   </div>
+				</div>
+			  </div>
+			   <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingFive">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 5
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 5
+				   </div>
+				</div>
+			  </div>
+			   <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingSix">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 6
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 6
+				   </div>
+				</div>
+			  </div>
+			   <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingSeven">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 7
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 7
+				   </div>
+				</div>
+			  </div>
+			   <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingEight">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 8
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+				   <div class="panel-body panel_text">
+					Содержание вопроса 8
+				   </div>
+				</div>
+			  </div>
+			   <div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingNine">
+				  <h4 class="panel-title asd">
+					<a class="pa_italic collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span><i class="glyphicon glyphicon-minus" aria-hidden="true"></i>Вопрос 9
+					</a>
+				  </h4>
+				</div>
+				<div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+				   <div class="panel-body panel_text">
+					Содеожание вопроса 9</div>
+				</div>
+			  </div>
+			</div>
+		</div>
+<!-- //faq -->
+		</div>
+		<div class="clearfix"></div>
+	</div>
+<!-- //banner -->
+<!-- newsletter -->
+<div th:if="${guest}" th:insert="blocks/newsletter :: newsletter"></div>
+<div th:if="${user}" th:insert="blocks_user/user_newsletter :: user_newsletter"></div>
+<!-- //newsletter -->
+<!-- footer -->
+<div th:if="${guest}" th:insert="blocks/footer :: footer"></div>
+<div th:if="${user}" th:insert="blocks_user/user_footer :: user_footer"></div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script src="../static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+<script th:src="@{/js/minicart.js}" src="../static/js/minicart.js" ></script>
+<script>
+		paypal.minicart.render();
+
+		paypal.minicart.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+
+			// Count the number of each item in the cart
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+
+	</script>
+</body>
+</html>

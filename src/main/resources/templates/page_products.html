@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>магазин БОЯРИНЯ | <span th:text="${title}"></span></title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- //for-mobile-apps -->
+    <link th:href="@{/css/bootstrap.css}" href="../static/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="@{/css/style.css}" href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link th:href="@{/css/font-awesome.css}" href="../static/css/font-awesome.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script th:src="@{/js/jquery-1.11.1.min.js}" src="../static/js/jquery-1.11.1.min.js"></script>
+    <!-- //js -->
+    <link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+          href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+          href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" th:src="@{/js/move-top.js}" src="/static/js/move-top.js"></script>
+    <script type="text/javascript" th:src="@{/js/easing.js}" src="/static/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+</head>
+
+<body>
+<!-- header -->
+<header th:if="${guest}" th:insert="blocks/header :: header"></header>
+<header th:if="${user}" th:insert="blocks_user/user_header :: user_header"></header>
+<!-- script-for sticky-nav -->
+<script>
+    $(document).ready(function() {
+        var navoffeset=$(".agileits_header").offset().top;
+        $(window).scroll(function(){
+            var scrollpos=$(window).scrollTop();
+            if(scrollpos >=navoffeset){
+                $(".agileits_header").addClass("fixed");
+            }else{
+                $(".agileits_header").removeClass("fixed");
+            }
+        });
+
+    });
+</script>
+<!-- //script-for sticky-nav -->
+<header th:if="${guest}" th:insert="blocks/logo_products :: logo_products"></header>
+<header th:if="${user}" th:insert="blocks_user/user_logo_products :: user_logo_products"></header>
+<!-- //header -->
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li th:if="${guest}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/index_page}" href="index.html">На главную</a><span>|</span></li>
+            <li th:if="${user}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/user/index_page}" href="index.html">На главную</a><span>|</span></li>
+            <li th:text="${title}">Branded Foods</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <div th:if="${guest}" th:insert="blocks/banner :: banner"></div>
+    <div th:if="${user}" th:insert="blocks_user/user_banner :: user_banner"></div>
+<!-- products_page -->
+    <div th:unless="${search}">
+        <div class="w3l_banner_nav_right">
+            <div class="w3l_banner_nav_right_banner3">
+                <h3>Лучшее предложение нового товара<span class="blink_me"></span></h3>
+            </div>
+            <div class="w3l_banner_nav_right_banner3_btm">
+                <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
+                    <div class="view view-tenth">
+                        <img th:src="@{/images/13.jpg}" src="../static/images/13.jpg" alt=" " class="img-responsive" />
+                        <div class="mask">
+                            <h4>Мясной магазин</h4>
+                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
+                        </div>
+                    </div>
+                    <h4>Utensils</h4>
+                    <ol>
+                        <li>sunt in culpa qui officia</li>
+                        <li>commodo consequat</li>
+                        <li>sed do eiusmod tempor incididunt</li>
+                    </ol>
+                </div>
+                <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
+                    <div class="view view-tenth">
+                        <img th:src="@{/images/14.jpg}" src="../static/images/14.jpg" alt=" " class="img-responsive" />
+                        <div class="mask">
+                            <h4>Grocery Store</h4>
+                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
+                        </div>
+                    </div>
+                    <h4>Hair Care</h4>
+                    <ol>
+                        <li>enim ipsam voluptatem officia</li>
+                        <li>tempora incidunt ut labore et</li>
+                        <li>vel eum iure reprehenderit</li>
+                    </ol>
+                </div>
+                <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
+                    <div class="view view-tenth">
+                        <img th:src="@{/images/15.jpg}" src="../static/images/15.jpg" alt=" " class="img-responsive" />
+                        <div class="mask">
+                            <h4>Grocery Store</h4>
+                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt.</p>
+                        </div>
+                    </div>
+                    <h4>Cookies</h4>
+                    <ol>
+                        <li>dolorem eum fugiat voluptas</li>
+                        <li>ut aliquid ex ea commodi</li>
+                        <li>magnam aliquam quaerat</li>
+                    </ol>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="w3ls_w3l_banner_nav_right_grid">
+                <h3>Popular Brands</h3>
+                <div class="w3ls_w3l_banner_nav_right_grid1">
+                    <h6>food</h6>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form th:action="@{#}" th:method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="w3ls_w3l_banner_nav_right_grid1">
+                    <h6>vegetables & fruits</h6>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="tag">
+                                    <img th:src="@{/images/tag.jpg}" src="/static/images/tag.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="w3ls_w3l_banner_nav_right_grid1">
+                    <h6>beverages</h6>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="tag">
+                                    <img th:src="@{/images/tag.jpg}" src="/static/images/tag.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 w3ls_w3l_banner_left">
+                        <div class="hover14 column">
+                            <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                <div class="agile_top_brand_left_grid_pos">
+                                    <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                </div>
+                                <div class="agile_top_brand_left_grid1">
+                                    <figure>
+                                        <div th:if="${guest}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div th:if="${user}" class="snipcart-item block">
+                                            <div class="snipcart-thumb">
+                                                <a th:href="@{~/user/single}" href="single.html">
+                                                    <img th:src="@{/images/48.png}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                <p>flax & walnut loaf (400 gm)</p>
+                                                <h4>$7.00 <span>$9.00</span></h4>
+                                            </div>
+                                            <div class="snipcart-details">
+                                                <form action="#" method="post">
+                                                    <fieldset>
+                                                        <input type="hidden" name="cmd" value="_cart" />
+                                                        <input type="hidden" name="add" value="1" />
+                                                        <input type="hidden" name="business" value=" " />
+                                                        <input type="hidden" name="item_name" value="flax & walnut loaf" />
+                                                        <input type="hidden" name="amount" value="7.00" />
+                                                        <input type="hidden" name="discount_amount" value="1.00" />
+                                                        <input type="hidden" name="currency_code" value="USD" />
+                                                        <input type="hidden" name="return" value=" " />
+                                                        <input type="hidden" name="cancel_return" value=" " />
+                                                        <input type="submit" name="submit" value="Add to cart" class="button" />
+                                                    </fieldset>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<!-- //products_page -->
+<!-- search result -->
+    <div th:if="${search}">
+        <div class="w3l_banner_nav_right">
+            <div th:if="${! message.isEmpty()}"  class="w3l_banner_nav_right_banner3">
+                <h3 th:text="${message}">Лучшее предложение нового товара<span class="blink_me"></span></h3>
+            </div>
+            <div th:if="${ message.isEmpty()}"
+                 class="w3ls_w3l_banner_nav_right_grid">
+                <h3>Акционное предложение товара!</h3>
+                <div th:each="type : ${type_list}" class="w3ls_w3l_banner_nav_right_grid1">
+                    <h6 th:text="${type.getType_name()}">food </h6>
+                    <div th:each="product, prodStat : ${product_list}">
+                        <div th:if="${product.getType_product().getType_name().equals(${type})}"
+                                class="col-md-3 w3ls_w3l_banner_left">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                    <div class="agile_top_brand_left_grid_pos">
+                                        <img th:src="@{/images/offer.jpg}" src="/static/images/offer.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div th:if="${guest}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${product.getId()})}" href="single.html">
+                                                        <img th:src="@{~/product.getPicture_path()}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${product.getName()}">flax & walnut loaf (400 gm)</p>
+                                                    <h4 th:text="${product.getPrice() - product.getPrice()*product.getDiscount()/100} + ' грн'" >$7.00
+                                                        <span th:text="${product.getPrice()} + ' грн'" >$9.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${product.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${product.getPrice() -
+                                                                       product.getPrice()*product.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${product.getPrice()*product.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div th:if="${user}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/user/single/{prodId}(prodId = ${product.getId()})}" href="single.html">
+                                                        <img th:src="@{~/product.getPicture_path()}" src="../static/images/48.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${product.getName()}">flax & walnut loaf (400 gm)</p>
+                                                    <h4 th:text="${product.getPrice() - product.getPrice()*product.getDiscount()/100} + ' грн'" >$7.00
+                                                        <span th:text="${product.getPrice()} + ' грн'" >$9.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{~/user/payment/{id}(id = ${user_person.getId()})}" th:method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${product.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${product.getPrice() -
+                                                                       product.getPrice()*product.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${product.getPrice()*product.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+<!-- //search result-->
+</div>
+<!-- //banner -->
+<!-- newsletter -->
+<div th:if="${guest}" th:insert="blocks/newsletter :: newsletter"></div>
+<div th:if="${user}" th:insert="blocks_user/user_newsletter :: user_newsletter"></div>
+<!-- //newsletter -->
+<!-- footer -->
+<div th:if="${guest}" th:insert="blocks/footer :: footer"></div>
+<div th:if="${user}" th:insert="blocks_user/user_footer :: user_footer"></div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/js/bootstrap.min.js}" src="/static/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".dropdown").hover(
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                $(this).toggleClass('open');
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<script th:src="@{/js/minicart.js}" src="/static/js/minicart.js"></script>
+<script>
+    paypal.minicart.render();
+
+    paypal.minicart.cart.on('checkout', function (evt) {
+        var items = this.items(),
+            len = items.length,
+            total = 0,
+            i;
+
+        // Count the number of each item in the cart
+        for (i = 0; i < len; i++) {
+            total += items[i].get('quantity');
+        }
+
+        if (total < 3) {
+            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+            evt.preventDefault();
+        }
+    });
+
+</script>
+</body>
+</html>

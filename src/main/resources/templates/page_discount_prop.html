@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>магазин БОЯРИНЯ | Птица</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- //for-mobile-apps -->
+    <link href="../static/css/bootstrap.css"  th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- font-awesome icons -->
+    <link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css" media="all" />
+    <!-- //font-awesome icons -->
+    <!-- js -->
+    <script src="../static/js/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+    <!-- //js -->
+    <link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+          href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+          href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+    <!-- start-smoth-scrolling -->
+    <script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+    <script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smoth-scrolling -->
+</head>
+
+<body>
+<!-- header -->
+<header th:if="${guest}" th:insert="blocks/header :: header"></header>
+<header th:if="${user}" th:insert="blocks_user/user_header :: user_header"></header>
+<!-- script-for sticky-nav -->
+<script>
+    $(document).ready(function() {
+        var navoffeset=$(".agileits_header").offset().top;
+        $(window).scroll(function(){
+            var scrollpos=$(window).scrollTop();
+            if(scrollpos >=navoffeset){
+                $(".agileits_header").addClass("fixed");
+            }else{
+                $(".agileits_header").removeClass("fixed");
+            }
+        });
+
+    });
+</script>
+<!-- //script-for sticky-nav -->
+<header th:if="${guest}" th:insert="blocks/logo_products :: logo_products"></header>
+<header th:if="${user}" th:insert="blocks_user/user_logo_products :: user_logo_products"></header>
+<!-- //header -->
+<!-- products-breadcrumb -->
+<div class="products-breadcrumb">
+    <div class="container">
+        <ul>
+            <li th:if="${guest}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/index_page}" href="index.html">На главную</a><span>|</span></li>
+            <li th:if="${user}"><i class="fa fa-home" aria-hidden="true"></i><a th:href="@{~/user/index_page}" href="index.html">На главную</a><span>|</span></li>
+            <li>Акционные товары</li>
+        </ul>
+    </div>
+</div>
+<!-- //products-breadcrumb -->
+<!-- banner -->
+<div class="banner">
+    <div th:if="${guest}" th:insert="blocks/banner :: banner"></div>
+    <div th:if="${user}" th:insert="blocks_user/user_banner :: user_banner"></div>
+    <div class="w3l_banner_nav_right">
+        <div class="w3l_banner_nav_right_banner5">
+
+        </div>
+
+        <div th:unless="${discount}" class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
+            <h3 class="w3l_fruit" th:text="${prodDiscountMessage}"></h3>
+        </div>
+        <div th:if="${discount}"
+             class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
+            <h3  class="w3l_fruit">Акционные товары </h3>
+            <div th:each="typeProduct, iStatType : ${typeProductList}" th:with="index = 1">
+                <h6 th:text="${typeProduct.getType_name()}">Курица</h6>
+                <div th:each="prodDiscount,iStat : ${prodDiscountList}"
+                     class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+                    <div th:if="${prodDiscount.getType_product().getType_name().equals(${typeProduct.getType_name()})}">
+
+                        <div th:class="${index == 1}? 'col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd'" th:with="${index + 1}">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                    <div class="tag"><img th:src="@{/images/tag.png}" src="../static/images/tag.png" alt=" " class="img-responsive"></div>
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div th:if="${guest}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="@{~/prodDiscount.getPicture_path()}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div th:if="${user}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{~/user/payment}" th:method="post" action="#" method="post">
+                                                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:class="${index == 2}? 'col-md-3 w3ls_w3l_banner_left'" th:with="${index + 1}">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                    <div class="agile_top_brand_left_grid_pos">
+                                        <img th:src="@{/images/offer.png}" src="../static/images/offer.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div th:if="${guest}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div th:if="${user}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:class="${index == 3}? 'col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd'" th:with="${index + 1}">
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                    <div class="agile_top_brand_left_grid_pos">
+                                        <img th:src="@{/images/offer.png}" src="../static/images/offer.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div th:if="${guest}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div th:if="${user}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:class="${index == 4}? 'col-md-3 w3ls_w3l_banner_left'" th:with="${index - 3}"
+                        >
+                            <div class="hover14 column">
+                                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                                    <div class="agile_top_brand_left_grid_pos">
+                                        <img th:src="@{/images/offer.png}" src="../static/images/offer.png" alt=" " class="img-responsive" />
+                                    </div>
+                                    <div class="agile_top_brand_left_grid1">
+                                        <figure>
+                                            <div th:if="${guest}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div th:if="${user}" class="snipcart-item block">
+                                                <div class="snipcart-thumb">
+                                                    <a th:href="@{~/single/{prodId}(prodId = ${prodDiscount.getId()})}" href="single.html">
+                                                        <img th:src="${prodDiscount.getPictures().get(0)}" src="../static/images/29.png" alt=" " class="img-responsive" /></a>
+                                                    <p th:text="${prodDiscount.getName()}">Fresh Bananas (1 kg)</p>
+                                                    <h4 th:text="${prodDiscount.getPrice() - prodDiscount.getPrice()*prodDiscount.getDiscount()/100} + ' грн'">10.00
+                                                        <span th:text="${prodDiscount.getPrice()} + ' грн'">12.00</span></h4>
+                                                </div>
+                                                <div class="snipcart-details">
+                                                    <form th:action="@{/payment}" th:method="post" action="#" method="post">
+                                                        <fieldset>
+                                                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                                            <input type="hidden" th:name="${cmd}" th:value="_cart" />
+                                                            <input type="hidden" th:name="${add}" value="1" />
+                                                            <input type="hidden" th:name="${business}" value=" " />
+                                                            <input type="hidden" th:name="${item_name}" th:value="${prodDiscount.getName()}" />
+                                                            <input type="hidden" th:name="${amount}"
+                                                                   th:value="${prodDiscount.getPrice() -
+                                                                   prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${discount_amount}"
+                                                                   th:value="${prodDiscount.getPrice()*prodDiscount.getDiscount()/100}" />
+                                                            <input type="hidden" th:name="${currency_code}" th:value="|грн|" />
+                                                            <input type="hidden" th:name="${return}" th:value="' '" />
+                                                            <input type="hidden" th:name="${cancel_return}" th:value="' '" />
+                                                            <input type="submit" th:name="${submit}" th:value="'Добавить в корзину" class="button" />
+                                                        </fieldset>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="clearfix"> </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<!-- //banner -->
+<!-- newsletter -->
+<div th:if="${guest}" th:insert="blocks/newsletter :: newsletter"></div>
+<div th:if="${user}" th:insert="blocks_user/user_newsletter :: user_newsletter"></div>
+<!-- //newsletter -->
+<!-- footer -->
+<div th:if="${guest}" th:insert="blocks/footer :: footer"></div>
+<div th:if="${user}" th:insert="blocks_user/user_footer :: user_footer"></div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".dropdown").hover(
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+                $(this).toggleClass('open');
+            },
+            function() {
+                $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+</script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear'
+            };
+        */
+
+        $().UItoTop({ easingType: 'easeOutQuart' });
+
+    });
+</script>
+<!-- //here ends scrolling icon -->
+<script th:src="@{/js/minicart.js}" src="../static/js/minicart.js"></script>
+<script>
+    paypal.minicart.render();
+
+    paypal.minicart.cart.on('checkout', function (evt) {
+        var items = this.items(),
+            len = items.length,
+            total = 0,
+            i;
+
+        // Count the number of each item in the cart
+        for (i = 0; i < len; i++) {
+            total += items[i].get('quantity');
+        }
+
+        if (total < 3) {
+            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+            evt.preventDefault();
+        }
+    });
+
+</script>
+</body>
+</html>

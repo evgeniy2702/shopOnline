@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>магазин БОЯРИНЯ | Главная</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- //for-mobile-apps -->
+	<link href="../static/css/bootstrap.css"  th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+	<link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- font-awesome icons -->
+	<link href="../static/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet" type="text/css" media="all" />
+	<!-- //font-awesome icons -->
+	<!-- js -->
+	<script src="../static/js/jquery-1.11.1.min.js" th:src="@{/js/jquery-1.11.1.min.js}"></script>
+	<!-- //js -->
+	<link th:href="@{//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic}"
+		  href='//fonts.googleapis.com/css?family=Ubuntu:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+	<link th:href="@{//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic}"
+		  href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<!-- start-smoth-scrolling -->
+	<script type="text/javascript" th:src="@{/js/move-top.js}" src="../static/js/move-top.js"></script>
+	<script type="text/javascript" th:src="@{/js/easing.js}" src="../static/js/easing.js"></script>
+	<script type="text/javascript">
+		jQuery(document).ready(function($) {
+			$(".scroll").click(function(event){
+				event.preventDefault();
+				$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+			});
+		});
+	</script>
+	<!-- start-smoth-scrolling -->
+</head>
+	
+<body>
+<!-- header -->
+<header th:if="${guest}" th:insert="blocks/header :: header"></header>
+<header th:if="${user}" th:insert="blocks_user/user_header :: user_header"></header>
+<!-- script-for sticky-nav -->
+	<script>
+	$(document).ready(function() {
+		 var navoffeset=$(".agileits_header").offset().top;
+		 $(window).scroll(function(){
+			var scrollpos=$(window).scrollTop(); 
+			if(scrollpos >=navoffeset){
+				$(".agileits_header").addClass("fixed");
+			}else{
+				$(".agileits_header").removeClass("fixed");
+			}
+		 });
+		 
+	});
+	</script>
+<!-- //script-for sticky-nav -->
+<header th:if="${guest}" th:insert="blocks/logo_products :: logo_products"></header>
+<header th:if="${user}" th:insert="blocks_user/user_logo_products :: user_logo_products"></header>
+<!-- //header -->
+<!-- banner -->
+	<div class="banner">
+		<div th:if="${guest}" th:insert="blocks/banner :: banner"></div>
+		<div th:if="${user}" th:insert="blocks_user/user_banner :: user_banner"></div>
+		<div class="w3l_banner_nav_right">
+			<section class="slider">
+				<div class="flexslider">
+					<ul class="slides">
+						<li>
+							<div class="w3l_banner_nav_right_banner">
+								<h3>Разнообразьте <span>свои блюда </span> ароматными специями.</h3>
+								<div class="more">
+									<a th:if="${guest}" th:href="@{~/page_spice}" href="../../../just_dir/page_pig.html"
+									   class="button--saqui button--round-l button--text-thick"
+									   data-text="Shop now">Отправиться за покупками</a>
+									<a th:if="${user}" th:href="@{~/user/page_spice}" href="../../../just_dir/page_pig.html"
+									   class="button--saqui button--round-l button--text-thick"
+									   data-text="Shop now">Отправиться за покупками</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="w3l_banner_nav_right_banner1">
+								<h3>Разнообразьте <span>свои блюда </span> мясными изделиями.</h3>
+								<div class="more">
+									<a th:if="${guest}" th:href="@{~/page_frozen}" href="../../../just_dir/page_pig.html"
+									   class="button--saqui button--round-l button--text-thick"
+									   data-text="Shop now">Отправиться за покупками</a>
+									<a th:if="${user}" th:href="@{~/user/page_frozen}" href="../../../just_dir/page_pig.html"
+									   class="button--saqui button--round-l button--text-thick"
+									   data-text="Shop now">Отправиться за покупками</a>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="w3l_banner_nav_right_banner2">
+								<h3>скидка до <i>50%</i>.</h3>
+								<div class="more">
+									<a th:if="${guest}" th:href="@{~/page_frozen}" href="../../../just_dir/page_pig.html"
+									   class="button--saqui button--round-l button--text-thick"
+									   data-text="Shop now">Отправиться за покупками</a>
+									<a th:if="${user}" th:href="@{~/user/page_frozen}" href="../../../just_dir/page_pig.html"
+									   class="button--saqui button--round-l button--text-thick"
+									   data-text="Shop now">Отправиться за покупками</a>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</section>
+			<!-- flexSlider -->
+				<link rel="stylesheet" th:href="@{/css/flexslider.css}" href="../static/css/flexslider.css" type="text/css" media="screen" property="" />
+				<script defer th:src="@{/js/jquery.flexslider.js}" src="../static/js/jquery.flexslider.js"></script>
+				<script type="text/javascript">
+				$(window).load(function(){
+				  $('.flexslider').flexslider({
+					animation: "slide",
+					start: function(slider){
+					  $('body').removeClass('loading');
+					}
+				  });
+				});
+			  </script>
+			<!-- //flexSlider -->
+		</div>
+		<div class="clearfix"></div>
+	</div>
+<!-- banner -->
+	<div class="banner_bottom">
+			<div class="wthree_banner_bottom_left_grid_sub">
+			</div>
+			<div class="wthree_banner_bottom_left_grid_sub1">
+				<div class="col-md-4 wthree_banner_bottom_left">
+					<div class="wthree_banner_bottom_left_grid">
+						<img th:src="@{/images/4.jpg}" src="../static/images/4.jpg" alt=" " class="img-responsive" />
+						<div class="wthree_banner_bottom_left_grid_pos">
+							<h4>Товар со скидкой <span>25%</span></h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 wthree_banner_bottom_left">
+					<div class="wthree_banner_bottom_left_grid">
+						<img th:src="@{/images/5.jpg}" src="../static/images/5.jpg" alt=" " class="img-responsive" />
+						<div class="wthree_banner_btm_pos">
+							<h3>Лучший <span>магазин </span> <i>Мясных продуктов</i></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 wthree_banner_bottom_left">
+					<div class="wthree_banner_bottom_left_grid">
+						<img th:src="@{/images/6.jpg}" src="../static/images/6.jpg" alt=" " class="img-responsive" />
+						<div class="wthree_banner_btm_pos1">
+							<h3>Сэкономьте <span>до </span> $10</h3>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+	</div>
+<!-- top-brands -->
+	<div class="top-brands">
+		<div class="container">
+			<h3>Горячие предложения</h3>
+			<div class="agile_top_brands_grids">
+				<div class="col-md-3 top_brand_left">
+					<div class="hover14 column">
+						<div class="agile_top_brand_left_grid">
+							<div class="tag"><img th:src="@{/images/tag.png}" src="../static/images/tag.png" alt=" " class="img-responsive" /></div>
+							<div class="agile_top_brand_left_grid1">
+								<figure>
+									<div class="snipcart-item block" >
+										<div class="snipcart-thumb">
+											<a th:href="@{~/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/1.png}" src="../static/images/1.png" /></a>
+											<a th:href="@{~/user/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/1.png}" src="../static/images/1.png" /></a>
+											<p>fortune sunflower oil</p>
+											<h4>$7.99 <span>$10.00</span></h4>
+										</div>
+										<div class="snipcart-details top_brand_home_details">
+											<form th:if="${guest}" th:action="@{~/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+													
+											</form>
+											<form th:if="${user}" th:action="@{~/user/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+									
+										</div>
+									</div>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 top_brand_left">
+					<div class="hover14 column">
+						<div class="agile_top_brand_left_grid">
+							<div class="agile_top_brand_left_grid1">
+								<figure>
+									<div class="snipcart-item block" >
+										<div class="snipcart-thumb">
+											<a th:href="@{~/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/3.png}" src="../static/images/3.png" /></a>
+											<a th:href="@{~/user/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/3.png}" src="../static/images/1.png" /></a>
+											<p>basmati rise (5 Kg)</p>
+											<h4>$11.99 <span>$15.00</span></h4>
+										</div>
+										<div class="snipcart-details top_brand_home_details">
+											<form th:if="${guest}" th:action="@{~/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+											<form th:if="${user}" th:action="@{~/user/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+										</div>
+									</div>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 top_brand_left">
+					<div class="hover14 column">
+						<div class="agile_top_brand_left_grid">
+							<div class="agile_top_brand_left_grid_pos">
+								<img th:src="@{/images/offer.png}" src="../static/images/offer.png" alt=" " class="img-responsive" />
+							</div>
+							<div class="agile_top_brand_left_grid1">
+								<figure>
+									<div class="snipcart-item block">
+										<div class="snipcart-thumb">
+											<a th:href="@{~/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/2.png}" src="../static/images/2.png" /></a>
+											<a th:href="@{~/user/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/2.png}" src="../static/images/2.png" /></a>
+
+											<p>Pepsi soft drink (2 Ltr)</p>
+											<h4>$8.00 <span>$10.00</span></h4>
+										</div>
+										<div class="snipcart-details top_brand_home_details">
+											<form th:if="${guest}" th:action="@{~/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+											<form th:if="${user}" th:action="@{~/user/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+										</div>
+									</div>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 top_brand_left">
+					<div class="hover14 column">
+						<div class="agile_top_brand_left_grid">
+							<div class="agile_top_brand_left_grid_pos">
+								<img th:src="@{/images/offer.png}" src="../static/images/offer.png" alt=" " class="img-responsive" />
+							</div>
+							<div class="agile_top_brand_left_grid1">
+								<figure>
+									<div class="snipcart-item block">
+										<div class="snipcart-thumb">
+											<a th:href="@{~/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/4.png}" src="../static/images/4.png" /></a>
+											<a th:href="@{~/user/single}" href="single.html"><img title=" " alt=" "
+												th:src="@{/images/4.png}" src="../static/images/4.png" /></a>
+
+											<p>dogs food (4 Kg)</p>
+											<h4>$9.00 <span>$11.00</span></h4>
+										</div>
+										<div class="snipcart-details top_brand_home_details">
+											<form th:if="${guest}" th:action="@{~/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+											<form th:if="${user}" th:action="@{~/user/checkout}" th:method="post"
+												  action="checkout.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" />
+													<input type="hidden" name="add" value="1" />
+													<input type="hidden" name="business" value=" " />
+													<input type="hidden" name="item_name" value="Fortune Sunflower Oil" />
+													<input type="hidden" name="amount" value="7.99" />
+													<input type="hidden" name="discount_amount" value="1.00" />
+													<input type="hidden" name="currency_code" value="USD" />
+													<input type="hidden" name="return" value=" " />
+													<input type="hidden" name="cancel_return" value=" " />
+													<input type="submit" name="submit" value="Add to cart" class="button" />
+												</fieldset>
+
+											</form>
+										</div>
+									</div>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+<!-- //top-brands -->
+<!-- fresh-vegetables -->
+	<div class="fresh-vegetables">
+		<div class="container">
+			<h3>Наиболее покупаемы позиции</h3>
+			<div class="w3l_fresh_vegetables_grids">
+				<div class="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
+					<div class="w3l_fresh_vegetables_grid2">
+						<ul th:if="${guest}">
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_pig?param=moresale}" href="../../../just_dir/page_pig.html">Свинина</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_cow?param=moresale}" href="../../../just_dir/page_cow.html">Говядина</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_birds?param=chicken&sale=more}" href="../../../just_dir/page_birds.html">Курица</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_birds?param=turkey&sale=more}" href="../../../just_dir/page_birds.html">Индюк</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_birds?param=quail&sale=more}" href="../../../just_dir/page_birds.html">Перепела</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_fish?param=moresale}" href="../../../just_dir/page_fish.html">Рыба с/м</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/page_bread?param=moresale}" href="../../../just_dir/page_bread.html">Хлеб</a>
+							</li>
+						</ul>
+						<ul th:if="${user}">
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_pig?param=moresale}" href="../../../just_dir/page_pig.html">Свинина</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_cow?param=moresale}" href="../../../just_dir/page_cow.html">Говядина</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_birds?param=chicken&sale=more}" href="../../../just_dir/page_birds.html">Курица</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_birds?param=turkey&sale=more}" href="../../../just_dir/page_birds.html">Индюк</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_birds?param=quail&sale=more}" href="../../../just_dir/page_birds.html">Перепела</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_fish?param=moresale}" href="../../../just_dir/page_fish.html">Рыба с/м</a>
+							</li>
+							<li>
+								<i class="fa fa-check" aria-hidden="true"></i>
+								<a th:href="@{~/user/page_bread?param=moresale}" href="../../../just_dir/page_bread.html">Хлеб</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-9 w3l_fresh_vegetables_grid_right">
+					<div class="col-md-4 w3l_fresh_vegetables_grid">
+						<div class="w3l_fresh_vegetables_grid1">
+							<img th:src="@{/images/8.jpg}" src="../static/images/8.jpg" alt=" " class="img-responsive" />
+						</div>
+					</div>
+					<div class="col-md-4 w3l_fresh_vegetables_grid">
+						<div class="w3l_fresh_vegetables_grid1">
+							<div class="w3l_fresh_vegetables_grid1_rel">
+								<img th:src="@{/images/7.jpg}" src="../static/images/7.jpg" alt=" " class="img-responsive" />
+								<div class="w3l_fresh_vegetables_grid1_rel_pos">
+									<div class="more m1">
+										<a th:if="${guest}" th:href="@{~/page_pig}"
+                                           href="../../../just_dir/page_pig.html" class="button--saqui button--round-l button--text-thick"
+                                           data-text="Shop now">Отправиться за покупками</a>
+										<a th:if="${user}" th:href="@{~/user/page_pig}"
+                                           href="../../../just_dir/page_pig.html" class="button--saqui button--round-l button--text-thick"
+                                           data-text="Shop now">Отправиться за покупками</a>
+
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="w3l_fresh_vegetables_grid1_bottom">
+							<img th:src="@{/images/10.jpg}" src="../static/images/10.jpg" alt=" " class="img-responsive" />
+							<div class="w3l_fresh_vegetables_grid1_bottom_pos">
+								<h5>Специальное предложение</h5>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 w3l_fresh_vegetables_grid">
+						<div class="w3l_fresh_vegetables_grid1">
+							<img th:src="@{/images/9.jpg}" src="../static/images/9.jpg" alt=" " class="img-responsive" />
+						</div>
+						<div class="w3l_fresh_vegetables_grid1_bottom">
+							<img th:src="@{/images/11.jpg}" src="../static/images/11.jpg" alt=" " class="img-responsive" />
+						</div>
+					</div>
+					<div class="clearfix"> </div>
+					<div class="agileinfo_move_text">
+						<div class="agileinfo_marquee">
+							<h4>Получите <span class="blink_me">скидку 25% </span> на первый заказ, а также подарочные сертификат</h4>
+						</div>
+						<div class="agileinfo_breaking_news">
+							<span> </span>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+	</div>
+<!-- //fresh-vegetables -->
+<!-- newsletter -->
+<div th:if="${guest}" th:insert="blocks/newsletter :: newsletter"></div>
+<div th:if="${user}" th:insert="blocks_user/user_newsletter :: user_newsletter"></div>
+<!-- //newsletter -->
+<!-- footer -->
+<div th:if="${guest}" th:insert="blocks/footer :: footer"></div>
+<div th:if="${user}" th:insert="blocks_user/user_footer :: user_footer"></div>
+<!-- //footer -->
+<!-- Bootstrap Core JavaScript -->
+<script th:src="@{/js/bootstrap.min.js}" src="../static/js/bootstrap.min.js"></script>
+<script>
+$(document).ready(function(){
+    $(".dropdown").hover(            
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideDown("fast");
+            $(this).toggleClass('open');        
+        },
+        function() {
+            $('.dropdown-menu', this).stop( true, true ).slideUp("fast");
+            $(this).toggleClass('open');       
+        }
+    );
+});
+</script>
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+<script th:src="@{/js/minicart.js}" src="../static/js/minicart.js"></script>
+<script>
+		paypal.minicart.render();
+
+		paypal.minicart.cart.on('checkout', function (evt) {
+			var items = this.items(),
+				len = items.length,
+				total = 0,
+				i;
+
+			// Count the number of each item in the cart
+			for (i = 0; i < len; i++) {
+				total += items[i].get('quantity');
+			}
+
+			if (total < 3) {
+				alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
+				evt.preventDefault();
+			}
+		});
+
+	</script>
+</body>
+</html>

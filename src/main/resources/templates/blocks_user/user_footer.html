@@ -1,0 +1,127 @@
+<div class="footer" th:fragment="user_footer" xmlns:th="http://www.thymeleaf.org">
+    <div class="container">
+        <div class="col-md-3 w3_footer_grid">
+            <h3>Информация</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a th:href="@{/user/events}" href="../events.html">События</a></li>
+                <li><a th:href="@{/user/about}" href="../about.html">О нас</a></li>
+                <li><a th:href="@{/user/special}" href="../../../../just_dir/page_pig.html">Лучшие предложения</a></li>
+                <li><a th:href="@{/user/services}" href="../services.html">Обслуживания</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 w3_footer_grid">
+            <h3>Безопасность</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a th:href="@{/user/foqs}" href="../faqs.html">Часто задаваемые вопросы</a></li>
+                <li><a th:href="@{/user/privacy}" href="../privacy.html">Безопасность</a></li>
+                <li><a th:href="@{/user/privacy}" href="../privacy.html">Условия эксплуатациии</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 w3_footer_grid">
+            <h3>Что продаем в магазине</h3>
+            <ul class="w3_footer_grid_list">
+                <li><a th:href="@{/user/page_pig}" href="../../../../just_dir/page_pig.html">Мясо свинины</a></li>
+                <li><a th:href="@{/user/page_cow}" href="../../../../just_dir/page_cow.html">Мясо телятины</a></li>
+                <li class="dropdown mega-dropdown active">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Мясо птицы :<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                <li><a th:href="@{/user/page_birds?param=chicken}" href="../../../../just_dir/page_birds.html">Курица</a></li>
+                                <li><a th:href="@{/user/page_birds?param=turkey}" href="../../../../just_dir/page_birds.html">Индюк</a></li>
+                                <li><a th:href="@{/user/page_birds?param=quail}" href="../../../../just_dir/page_birds.html">Перепела</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a th:href="@{/user/page_fish}" href="../../../../just_dir/page_fish.html">Замороженая рыба</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Бакалея :<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                <li><a th:href="@{/user/page_grocery?param=chumak}" href="../../../../just_dir/page_fish.html">Чумак</a></li>
+                                <li><a th:href="@{/user/page_grocery?param=torchin}" href="../../../../just_dir/page_fish.html">Торчин</a></li>
+                                <li><a th:href="@{/user/page_grocery?param=sto_pudov}" href="../../../../just_dir/page_fish.html">Сто Пудов</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Специи :<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                <li><a th:href="@{/user/page_spice?param=Gospodar}" href="../../../../just_dir/page_fish.html">Добрый господарь</a></li>
+                                <li><a th:href="@{/user/page_spice?param=Georgian}" href="../../../../just_dir/page_fish.html">Грузинские специи</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Молочная продукция :<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                <li><a th:href="@{/user/page_milk?param=selyanske}" href="../../../../just_dir/page_fish.html">Селянське</a></li>
+                                <li><a th:href="@{/user/page_milk?param=helth_eat}" href="../../../../just_dir/page_fish.html">Здорова їжа</a></li>
+                                <li><a th:href="@{/user/page_milk?param=moshurov}" href="../../../../just_dir/page_fish.html">Мошуровский МКК</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Заморозка<span class="caret"></span></a>
+                    <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                        <div class="w3ls_vegetables">
+                            <ul>
+                                <li><a th:href="@{/user/page_frozen?param=dumplings}" href="../../../../just_dir/page_frozen.html">Пельмени</a></li>
+                                <li><a th:href="@{/user/page_frozen?param=vareniki}" href="../../../../just_dir/page_frozen.html">Вареники</a></li>
+                                <li><a th:href="@{/user/page_frozen?param=golubci}" href="../../../../just_dir/page_frozen.html">Голубцы</a></li>
+                                <li><a th:href="@{/user/page_frozen?param=pancakes}" href="../../../../just_dir/page_frozen.html">Блинчики</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a th:href="@{/user/page_bread?param=bread}" href="../../../../just_dir/page_bread.html">Хлеб</a></li>
+                <li><a th:href="@{/user/page_discount_prop}" href="../page_discount_prop.html">Акционный товар</a></li>
+            </ul>
+        </div>
+        <div class="col-md-3 w3_footer_grid">
+            <h3>посты в Twitter</h3>
+            <ul class="w3_footer_grid_list1">
+                <li><label class="fa fa-twitter" aria-hidden="true"></label><i>01 day ago</i><span>Non numquam <a href="#">http://sd.ds/13jklf#</a>
+						eius modi tempora incidunt ut labore et
+						<a href="#">http://sd.ds/1389kjklf#</a>quo nulla.</span></li>
+                <li><label class="fa fa-twitter" aria-hidden="true"></label><i>02 day ago</i><span>Con numquam <a href="#">http://fd.uf/56hfg#</a>
+						eius modi tempora incidunt ut labore et
+						<a href="#">http://fd.uf/56hfg#</a>quo nulla.</span></li>
+            </ul>
+        </div>
+        <div class="clearfix"> </div>
+        <div class="agile_footer_grids">
+            <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                <div class="w3_footer_grid_bottom">
+                    <h4>100% безопасные платежи</h4>
+                    <img th:src="@{/images/card.png}" src="/static/images/card.png" alt=" " class="img-responsive" />
+                </div>
+            </div>
+            <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+                <div class="w3_footer_grid_bottom">
+                    <h5>connect with us</h5>
+                    <ul class="agileits_social_icons">
+                        <li><a href="#" class="facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="google"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="instagram"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                        <li><a href="#" class="dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="wthree_footer_copy">
+            <p>© 2016 Grocery Store. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+        </div>
+    </div>
+</div>
